@@ -43,9 +43,9 @@ Author
 #include "externalWaveForcing.H"
 #include "waveTheory.H"
 
-//#include "relaxationShape.H"
-//#include "crossVersionCompatibility.H"
-//#include "setWaveField.H"
+#include "relaxationShape.H"
+#include "crossVersionCompatibility.H"
+#include "setWaveField.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -77,14 +77,12 @@ protected:
  	scalar Nsets;
 
         scalar rhoWater_;
-        //scalar Tsoft_;
         vector g_;
         vector direction_;
-        vector wind_;
         vector k_;
         scalar K_;
 
-	scalar ttEta[999999], yyEta[999999], ttEta1[999999], yyEta3, readTime[999999];
+	scalar ttEta[999999], yyEta[999999], readTime[999999];
 
     // Protected member functions
         inline scalar returnZ(const point& x) const
@@ -131,12 +129,12 @@ public:
         ) const;
 
 
-        virtual scalar ddxPd
-        (
-            const point&,
-            const scalar&,
-            const vector&
-        ) const;
+//        virtual scalar ddxPd
+//        (
+//            const point&,
+//            const scalar&,
+//            const vector&
+//        ) const;
 
 
         virtual vector U
