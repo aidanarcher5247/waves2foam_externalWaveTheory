@@ -28,7 +28,8 @@ License
 #include "addToRunTimeSelectionTable.H"
 #include "IFstream.H"
 
-//#include "fvCFD.H"
+#include "fvCFD.H"
+#include "uniformDimensionedFields.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -72,10 +73,8 @@ truncated3D::truncated3D
     
     k_(vector(coeffDict_.lookup("waveNumber"))),
     K_(mag(k_)),
-    g_( uniformDimensionedVectorField
-        (
-            mesh_.thisDb().lookupObject<uniformDimensionedVectorField>("g")
-        ).value() ),
+    
+    g_(Foam::meshObjects::gravity::New(mesh_.thisDb().time()).value()),    
     direction_( g_/mag(g_) )
 {
     {
@@ -95,7 +94,7 @@ truncated3D::truncated3D
         IFstream dataStream1("kinematics/surfaceElevation.dat");
 	for (label i=0; i<NSurface_; i++) //for (label i=0; i<2002; i++)
         {
-            dataStream1 >> ttEta[i] >> yyEta[i] >> yyEta3 >> yyEta3 >> yyEta3;
+            dataStream1 >> ttEta[i] >> yyEta[i];
         }
         IFstream dataStream2("kinematics/set.dat");
 	for (label i=0; i<Nsets; i++)
@@ -135,7 +134,7 @@ scalar truncated3D::eta
 }
 
 
-scalar truncated3D::ddxPd
+/*scalar truncated3D::ddxPd
 (
     const point& x,
     const scalar& time,
@@ -194,7 +193,7 @@ scalar truncated3D::ddxPd
     Pp2 = Pp + ((Pp1 - Pp)*(OFtime+timeUandEta_ - readTime[index])/(readTime[index+1] - readTime[index]));
 
     return Pp2;
-}
+}*/
 
 
 scalar truncated3D::pExcess
