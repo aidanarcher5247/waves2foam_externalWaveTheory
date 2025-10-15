@@ -320,7 +320,7 @@ vector truncated3D::U
     UUyy2 = UUyy + ((UUyy1 - UUyy)*(OFtime+timeUandEta_ - readTime[index])/(readTime[index+1] - readTime[index]));
     UUzz2 = UUzz + ((UUzz1 - UUzz)*(OFtime+timeUandEta_ - readTime[index])/(readTime[index+1] - readTime[index]));
 
-    return UUxx2*k_/K_ - UUyy2*direction_;
+    return UUxx2*k_/K_ - UUyy2*direction_ + UUzz2*vector(0, 1, 0);
 }
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
@@ -329,3 +329,4 @@ vector truncated3D::U
 } // End namespace Foam
 
 // ************************************************************************* //
+
